@@ -1,32 +1,56 @@
 import { useState } from "react";
 
 export default function NumberPicker(): JSX.Element {
-  const [counterValueFromCurrentRender, queueRerenderWithNewCounterValue] =
-    useState(0);
-  const [favouriteValueFromCurrentRender, queueRerenderWithNewFavouriteValue] =
-    useState(0);
+  const [emojiFromCurrentRender, queueRerenderWithNewEmojiValue] =
+    useState(" ");
+  const [secondEmojiFromCurrentRender, queueRerenderWithNewSecondValue] =
+    useState(" ");
+  const [addTotalEmojiFromCurrentRender, queueRerenderWithTotalValue] =
+    useState(" ");
+  
 
-  const handleAddOneToCounter = () => {
-    queueRerenderWithNewCounterValue(counterValueFromCurrentRender + 1);
+  const handleAddSkiingEmoji = () => {
+    queueRerenderWithNewEmojiValue("🏂");
+    queueRerenderWithNewSecondValue(emojiFromCurrentRender);
+    queueRerenderWithTotalValue(addTotalEmojiFromCurrentRender+"🏂")
   };
 
-  const handleSubtractOneFromCounter = () => {
-    queueRerenderWithNewCounterValue(counterValueFromCurrentRender - 1);
+  const handleAddBeachEmoji = () => {
+    queueRerenderWithNewEmojiValue("🏝");
+    queueRerenderWithNewSecondValue(emojiFromCurrentRender);
+    queueRerenderWithTotalValue(addTotalEmojiFromCurrentRender+"🏝")
   };
 
-  const handleStoreCurrentCount = () => {
-    queueRerenderWithNewFavouriteValue(counterValueFromCurrentRender);
+  const handleAddSurfEmoji = () => {
+    queueRerenderWithNewEmojiValue("🏄");
+    queueRerenderWithNewSecondValue(emojiFromCurrentRender);
+    queueRerenderWithTotalValue(addTotalEmojiFromCurrentRender+"🏄")
+  };
+
+  const handleAddCampingEmoji = () => {
+    queueRerenderWithNewEmojiValue("🏕");
+    queueRerenderWithNewSecondValue(emojiFromCurrentRender);
+    queueRerenderWithTotalValue(addTotalEmojiFromCurrentRender+"🏕")
+  };
+
+  const handleAddCityEmoji = () => {
+    queueRerenderWithNewEmojiValue("🏙");
+    queueRerenderWithNewSecondValue(emojiFromCurrentRender);
+    queueRerenderWithTotalValue(addTotalEmojiFromCurrentRender+"🏙")
   };
 
   return (
     <>
-      <h1>Number picker</h1>
-      <p>Your stored number: {favouriteValueFromCurrentRender}</p>
-      <p>Counter: {counterValueFromCurrentRender}</p>
-      <button onClick={handleSubtractOneFromCounter}>-1</button>
-      <button onClick={handleAddOneToCounter}>+1</button>
+      <h1>Emoji picker</h1>
+      <p>Chosen emoji's: {emojiFromCurrentRender}and{secondEmojiFromCurrentRender}</p>
+      <p>Emoji History: {addTotalEmojiFromCurrentRender}</p>
+      <button onClick={handleAddSkiingEmoji}>🏂</button>
+      <button onClick={handleAddBeachEmoji}>🏝</button>
+      <button onClick={handleAddSurfEmoji}>🏄</button> 
+      <button onClick={handleAddCampingEmoji}>🏕</button> 
+      <button onClick={handleAddCityEmoji}>🏙</button> 
       <hr />
-      <button onClick={handleStoreCurrentCount}>Store current count</button>
+      {/* <button onClick={handleStoreSkiingEmjoi}>Store current count</button> */}
     </>
   );
 }

@@ -1,56 +1,43 @@
 import { useState } from "react";
 
 export default function NumberPicker(): JSX.Element {
-  const [emojiFromCurrentRender, queueRerenderWithNewEmojiValue] =
-    useState(" ");
-  const [secondEmojiFromCurrentRender, queueRerenderWithNewSecondValue] =
-    useState(" ");
-  const [addTotalEmojiFromCurrentRender, queueRerenderWithTotalValue] =
-    useState(" ");
-  
+  const [currentValue, newValue] =
+    useState<string[]>([]);
 
   const handleAddSkiingEmoji = () => {
-    queueRerenderWithNewEmojiValue("🏂");
-    queueRerenderWithNewSecondValue(emojiFromCurrentRender);
-    queueRerenderWithTotalValue(addTotalEmojiFromCurrentRender+"🏂")
+    newValue([...currentValue, "🏂"]);
   };
 
   const handleAddBeachEmoji = () => {
-    queueRerenderWithNewEmojiValue("🏝");
-    queueRerenderWithNewSecondValue(emojiFromCurrentRender);
-    queueRerenderWithTotalValue(addTotalEmojiFromCurrentRender+"🏝")
+    newValue([...currentValue, "🏝"]);
   };
 
   const handleAddSurfEmoji = () => {
-    queueRerenderWithNewEmojiValue("🏄");
-    queueRerenderWithNewSecondValue(emojiFromCurrentRender);
-    queueRerenderWithTotalValue(addTotalEmojiFromCurrentRender+"🏄")
+    newValue([...currentValue, "🏄"]);
   };
 
   const handleAddCampingEmoji = () => {
-    queueRerenderWithNewEmojiValue("🏕");
-    queueRerenderWithNewSecondValue(emojiFromCurrentRender);
-    queueRerenderWithTotalValue(addTotalEmojiFromCurrentRender+"🏕")
+    newValue([...currentValue, "🏕"]);
   };
 
   const handleAddCityEmoji = () => {
-    queueRerenderWithNewEmojiValue("🏙");
-    queueRerenderWithNewSecondValue(emojiFromCurrentRender);
-    queueRerenderWithTotalValue(addTotalEmojiFromCurrentRender+"🏙")
+    newValue([...currentValue, "🏙"]);
   };
+
+  const emojiHistory = currentValue.map(x=> (<><li>{x}</li></>))
 
   return (
     <>
       <h1>Emoji picker</h1>
-      <p>Chosen emoji's: {emojiFromCurrentRender}and{secondEmojiFromCurrentRender}</p>
-      <p>Emoji History: {addTotalEmojiFromCurrentRender}</p>
+      <p>Fave emoji: {currentValue[currentValue.length-1]} previous emoji: {currentValue[currentValue.length-2]}</p>
       <button onClick={handleAddSkiingEmoji}>🏂</button>
       <button onClick={handleAddBeachEmoji}>🏝</button>
       <button onClick={handleAddSurfEmoji}>🏄</button> 
       <button onClick={handleAddCampingEmoji}>🏕</button> 
       <button onClick={handleAddCityEmoji}>🏙</button> 
       <hr />
-      {/* <button onClick={handleStoreSkiingEmjoi}>Store current count</button> */}
+      <p>History of all selected emojis:</p>
+      <ul>{emojiHistory.slice(Math.max(emojiHistory.length -5, 0))}</ul>
     </>
   );
 }
